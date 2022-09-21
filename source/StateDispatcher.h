@@ -104,14 +104,6 @@ private:
 
 	void sendCommonMessage(TgBot::Bot *bot, std::string message);
 
-
-
-//	 const std::string emo_heart 		=  u8"\u2764";
-//	 const std::string emo_disheart		=  u8"👎";//U+1F44E
-//	 const std::string emo_fine			=  u8"😄";
-//	 const std::string emo_message		=  u8"💬";
-//	 const std::string emo_processing	=  u8"💭";
-//	 const std::string emo_sleep		=  u8"💤";
 };
 
 #endif /* STATEDISPATCHER_H_ */
