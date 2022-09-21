@@ -36,12 +36,25 @@ std::string getDataFromUserDb<std::string>(pqxx::connection *conn, std::string f
 
 DbDispatcher::DbDispatcher() :
 	dbConn(nullptr) {
+    ConfigReader reader;
+    ConfigReader::DbConfig temp = reader.getConnectionData();
+    std::cout << "DataBase connection data: " <<
+                 "\nDataBase Name: "  <<temp.DbName   << " " <<
+                 "\nUserName: "       <<temp.UserName << " " <<
+                 "\nPassword: "<<temp.UserPassword << " " <<
+                 "\nHost Address: "   <<temp.HostName << " " <<
+                 "\nPort: "           <<temp.Port     << std::endl << std::endl;
+
 	geoDecoder = new GeoDecoder();
 	matcher = new Matcher();
 
+
 	try {
-		dbConn = new pqxx::connection("dbname = eddyneshton user = eddyneshton password = 54321\
-					hostaddr = 127.0.0.1 port = 5432");
+        dbConn = new pqxx::connection("dbname = "   + std::string(temp.DbName) +
+                                      " user = "    + std::string(temp.UserName) +
+                                      " password = "+ std::string(temp.UserPassword) +
+                                      " hostaddr = "+ std::string(temp.HostName) +
+                                      " port = "    + std::to_string(temp.Port));
 		if (dbConn->is_open()) {
 			std::cout<<"Db succesfully opened\n";
 		} else {
@@ -584,3 +597,27 @@ std::vector<Matcher::GenderSpec> Matcher::getTargetGenderSpec(GenderSpec self) {
 	}
 }
 
+
+ConfigReader::DbConfig ConfigReader::getConnectionData()
+{
+    try {
+        std::string fileName = "dbConfig";
+        std::ifstream fin(fileName);
+        DbConfig res;
+        //std::string line;
+        fin.getline(res.DbName, 50);
+        fin.getline(res.UserName, 50);
+        fin.getline(res.UserPassword, 50);
+        fin.getline(res.HostName, 50);
+        char temp[50];
+        fin.getline(temp, 50);
+        res.Port = std::stoi(temp);
+        return res;
+
+
+    }  catch (std::exception &e) {
+        std::cout << "Error while reading dbConfig file" << std::endl;
+        throw;
+    }
+
+}

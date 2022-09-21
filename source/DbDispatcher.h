@@ -9,6 +9,7 @@
 #define DBDISPATCHER_H_
 #include <pqxx/pqxx>
 #include <tuple>
+#include <fstream>
 #include "GeoDecoder.h"
 
 class MiniProfile {
@@ -67,6 +68,19 @@ public:
 };
 
 using namespace pqxx;
+
+class ConfigReader {
+public:
+	typedef struct {
+        char DbName         [50];
+        char UserName       [50];
+        char UserPassword   [50];
+        char HostName       [50];
+        int Port;
+    } DbConfig;
+
+    DbConfig getConnectionData();
+};
 
 class DbDispatcher {
 public:

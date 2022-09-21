@@ -84,7 +84,7 @@ TgBot::InlineKeyboardMarkup::Ptr FlowBotState::getColumnInlineKeyboard() {
 			}
 			case 1: {
 				button->text = emo_disheart;
-				button->callbackData = std::to_string(DbDispatcher::IND_FLOW_MENU);
+                button->callbackData = std::to_string(DbDispatcher::IND_FLOW_MENU); ////////////////////////////////// mISTAKE
 				break;
 			}
 //			case 2: {
