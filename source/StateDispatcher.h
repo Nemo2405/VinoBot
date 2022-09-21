@@ -12,7 +12,6 @@
 #include <tgbot/tgbot.h>
 #include "DbDispatcher.h"
 
-
 class BaseBotState {
 public:
 
