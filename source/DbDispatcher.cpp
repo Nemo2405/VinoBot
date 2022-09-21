@@ -619,6 +619,8 @@ ConfigReader::DbConfig ConfigReader::getConnectionData()
         try {
             res.Port = std::stoi(temp);
         } catch (std::invalid_argument &e) {
+            std::cout << "error port " << std::endl;
+
             res.Port = 5432;
         }
 
