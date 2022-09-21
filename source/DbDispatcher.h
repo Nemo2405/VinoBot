@@ -76,7 +76,7 @@ public:
         char UserName       [50];
         char UserPassword   [50];
         char HostName       [50];
-        int Port;
+        char Port           [50];
 
     } DbConfig;
 

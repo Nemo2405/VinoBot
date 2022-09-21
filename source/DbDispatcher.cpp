@@ -54,7 +54,7 @@ DbDispatcher::DbDispatcher() :
                                       " user = "    + std::string(temp.UserName) +
                                       " password = "+ std::string(temp.UserPassword) +
                                       " hostaddr = "+ std::string(temp.HostName) +
-                                      " port = "    + std::to_string(temp.Port));
+                                      " port = "    + std::string(temp.Port));
 		if (dbConn->is_open()) {
 			std::cout<<"Db succesfully opened\n";
 		} else {
@@ -614,15 +614,7 @@ ConfigReader::DbConfig ConfigReader::getConnectionData()
         fin.getline(res.UserName, 50);
         fin.getline(res.UserPassword, 50);
         fin.getline(res.HostName, 50);
-        char temp[50];
-        fin.getline(temp, 50);
-        try {
-            res.Port = std::stoi(temp);
-        } catch (std::invalid_argument &e) {
-            std::cout << "error port " << std::endl;
-
-            res.Port = 5432;
-        }
+        fin.getline(res.Port, 50);
 
         return res;
 
