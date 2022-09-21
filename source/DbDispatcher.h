@@ -77,6 +77,7 @@ public:
         char UserPassword   [50];
         char HostName       [50];
         int Port;
+
     } DbConfig;
 
     DbConfig getConnectionData();

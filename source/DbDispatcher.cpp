@@ -252,13 +252,18 @@ std::vector<int> splitAdString(std::string adSeq, std::string delimiter) {
 
 	size_t pos = 0;
 	std::string token;
-	while ((pos = adSeq.find(delimiter)) != std::string::npos) {
-	    token = adSeq.substr(0, pos);
-	    //std::cout << token << std::endl;
-	    res.push_back(std::stoi(token));
-	    adSeq.erase(0, pos + delimiter.length());
-	}
-	res.push_back(std::stoi(adSeq));
+    try {
+        while ((pos = adSeq.find(delimiter)) != std::string::npos) {
+            token = adSeq.substr(0, pos);
+            //std::cout << token << std::endl;
+            res.push_back(std::stoi(token));
+            adSeq.erase(0, pos + delimiter.length());
+        }
+        res.push_back(std::stoi(adSeq));
+    }  catch (std::invalid_argument &e) {
+        return std::vector<int>();
+    }
+
 	return res;
 	//std::cout << s << std::endl;
 }
@@ -611,7 +616,12 @@ ConfigReader::DbConfig ConfigReader::getConnectionData()
         fin.getline(res.HostName, 50);
         char temp[50];
         fin.getline(temp, 50);
-        res.Port = std::stoi(temp);
+        try {
+            res.Port = std::stoi(temp);
+        } catch (std::invalid_argument &e) {
+            res.Port = 5432;
+        }
+
         return res;
 
 
