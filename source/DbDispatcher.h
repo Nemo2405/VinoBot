@@ -10,6 +10,11 @@
 #include <pqxx/pqxx>
 #include <tuple>
 #include <fstream>
+//#include "boost/filesystem.hpp"
+//#define BOOST_NO_CXX11_SCOPED_ENUMS
+//#include <boost/filesystem.hpp>
+//#undef BOOST_NO_CXX11_SCOPED_ENUMS
+
 #include "GeoDecoder.h"
 
 class MiniProfile {

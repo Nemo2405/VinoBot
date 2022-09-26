@@ -606,7 +606,10 @@ std::vector<Matcher::GenderSpec> Matcher::getTargetGenderSpec(GenderSpec self) {
 ConfigReader::DbConfig ConfigReader::getConnectionData()
 {
     try {
-        std::string fileName = "dbConfig";
+//        boost::filesystem::path absPath = boost::filesystem::complete("./");
+//        std::string path_str = absPath.string();
+//        std::cout << path_str << std::endl;
+        std::string fileName = std::string(std::getenv("HOME")) + "/dbConfig";
         std::ifstream fin(fileName);
         DbConfig res;
         //std::string line;

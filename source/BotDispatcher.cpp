@@ -135,7 +135,7 @@ void BotDispatcher::startBot() {
         //throw;
     }
     catch(std::exception &e) {
-    	std::cout << "ab" <<std::endl;
+//    	std::cout << "aborted" <<std::endl;
     }
     startBot();
 	}
