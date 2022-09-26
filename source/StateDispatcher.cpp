@@ -656,7 +656,7 @@ void StateDispatcher::setState(TgBot::Bot *bot, TgBot::Chat::Ptr chat, int newSt
 
 	BotState defaultState(		DbDispatcher::IND_MAIN_MENU,
 										"Главное меню. Выберите действие",
-std::vector<BotState::StateButton>({{"К анкетам", 	DbDispatcher::IND_SHOW_LIKER},
+std::vector<BotState::StateButton>({{"К анкетам)", 	DbDispatcher::IND_SHOW_LIKER},
 									{"Изменить анкету", 	DbDispatcher::IND_BLANC_EDIT},
 									{"Выйти", 				DbDispatcher::IND_DISABLE_ACCOUNT},
 									{"Пригласить друзей", 	DbDispatcher::IND_INVITE},}));
