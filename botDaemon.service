@@ -1,0 +1,15 @@
+[Unit]
+Description=VinoBot V2.0
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/user1/VinoBot/bin
+ExecStart=/home/user1/VinoBot/bin/telegram_bot
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
