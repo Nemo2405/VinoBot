@@ -111,6 +111,7 @@ BotDispatcher::BotDispatcher() {
     	} catch (std::exception &e) {
     		// if can't parse state
             std::cout << e.what() << std::endl;
+            std::cout << "111 " <<query->data << std::endl;
     		std::cout << "cannot convert " << query->data << " to int " << std::endl;
     		stateDispatcher->setState(bot, query->message->chat, DbDispatcher::IND_MAIN_MENU);
     	}

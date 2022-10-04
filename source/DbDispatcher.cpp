@@ -41,7 +41,7 @@ DbDispatcher::DbDispatcher() :
     std::cout << "DataBase connection data: " <<
                  "\nDataBase Name: "  <<temp.DbName   << " " <<
                  "\nUserName: "       <<temp.UserName << " " <<
-                 "\nPassword: "<<temp.UserPassword << " " <<
+                 "\nPassword: "		  <<temp.UserPassword << " " <<
                  "\nHost Address: "   <<temp.HostName << " " <<
                  "\nPort: "           <<temp.Port     << std::endl << std::endl;
 
@@ -50,11 +50,16 @@ DbDispatcher::DbDispatcher() :
 
 
 	try {
-        dbConn = new pqxx::connection("dbname = "   + std::string(temp.DbName) +
-                                      " user = "    + std::string(temp.UserName) +
-                                      " password = "+ std::string(temp.UserPassword) +
-                                      " hostaddr = "+ std::string(temp.HostName) +
-                                      " port = "    + std::string(temp.Port));
+//        dbConn = new pqxx::connection("dbname = "   + std::string(temp.DbName) +
+//                                      " user = "    + std::string(temp.UserName) +
+//                                      " password = "+ std::string(temp.UserPassword) +
+//                                      " hostaddr = "+ std::string(temp.HostName) +
+//                                      " port = "    + std::string(temp.Port));
+        dbConn = new pqxx::connection("dbname = "   		+ temp.DbName +
+                                              " user = "    + temp.UserName +
+                                              " password = "+ temp.UserPassword +
+                                              " hostaddr = "+ temp.HostName +
+                                              " port = "    + temp.Port);
 		if (dbConn->is_open()) {
 			std::cout<<"Db succesfully opened\n";
 		} else {
@@ -609,16 +614,28 @@ ConfigReader::DbConfig ConfigReader::getConnectionData()
 //        boost::filesystem::path absPath = boost::filesystem::complete("./");
 //        std::string path_str = absPath.string();
 //        std::cout << path_str << std::endl;
-        std::string fileName = std::string(std::getenv("HOME")) + "/dbConfig";
-        std::ifstream fin(fileName);
+//        std::string fileName = std::string(std::getenv("HOME")) + "/dbConfig";
+//        std::ifstream fin(fileName);
         DbConfig res;
         //std::string line;
-        fin.getline(res.DbName, 50);
-        fin.getline(res.UserName, 50);
-        fin.getline(res.UserPassword, 50);
-        fin.getline(res.HostName, 50);
-        fin.getline(res.Port, 50);
+//        fin.getline(res.DbName, 50);
+//        fin.getline(res.UserName, 50);
+//        fin.getline(res.UserPassword, 50);
+//        fin.getline(res.HostName, 50);
+//        fin.getline(res.Port, 50);
 
+        res.DbName = std::string(std::getenv("VinoBotDbName"));
+        res.UserName = std::string(std::getenv("VinoBotUserName"));
+        res.UserPassword = std::string(std::getenv("VinoBotUserPwd"));
+        res.HostName = std::string(std::getenv("VinoBotHostName"));
+        res.Port = std::string(std::getenv("VinoBotPort"));
+
+        //std::cout << "12 " <<std::getenv("VinoBotDbName") << std::endl;
+//        res.DbName = "vino_bot_data";
+//        res.UserName = "user1";
+//        res.UserPassword = "54321";
+//        res.HostName = "127.0.0.1";
+//        res.Port = "5432";
         return res;
 
 

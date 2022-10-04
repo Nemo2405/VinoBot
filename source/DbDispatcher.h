@@ -77,11 +77,16 @@ using namespace pqxx;
 class ConfigReader {
 public:
 	typedef struct {
-        char DbName         [50];
-        char UserName       [50];
-        char UserPassword   [50];
-        char HostName       [50];
-        char Port           [50];
+//        char DbName         [50];
+//        char UserName       [50];
+//       char UserPassword   [50];
+//        char HostName       [50];
+//        char Port           [50];
+        std::string DbName         ;
+        std::string UserName       ;
+        std::string UserPassword   ;
+        std::string HostName       ;
+        std::string Port           ;
 
     } DbConfig;
 
