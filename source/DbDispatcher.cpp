@@ -41,7 +41,7 @@ DbDispatcher::DbDispatcher() :
     std::cout << "DataBase connection data: " <<
                  "\nDataBase Name: "  <<temp.DbName   << " " <<
                  "\nUserName: "       <<temp.UserName << " " <<
-                 "\nPassword: "		  <<temp.UserPassword << " " <<
+                 //"\nPassword: "		  <<temp.UserPassword << " " <<
                  "\nHost Address: "   <<temp.HostName << " " <<
                  "\nPort: "           <<temp.Port     << std::endl << std::endl;
 
@@ -90,7 +90,8 @@ void DbDispatcher::execQuery(std::string query) {
 
 
 void DbDispatcher::addUser(int chatId, std::string username) {
-	execQuery("INSERT INTO userdata (chat_id, current_state, username) VALUES (" + std::to_string(chatId) + ", "+ std::to_string(IND_E_AGE_EDIT) +", '"+ username + "');");
+	execQuery("INSERT INTO userdata (chat_id, current_state, username, current_ad_tick, current_ad_seq) VALUES ("
+			+ std::to_string(chatId) + ", "+ std::to_string(IND_E_AGE_EDIT) +", '"+ username + "', 1, 0);");
 	std::cout<<"new user " << chatId << " was added\n";
 }
 

@@ -28,6 +28,14 @@ BotDispatcher::BotDispatcher() {
 
 
     bot->getEvents().onAnyMessage([this](TgBot::Message::Ptr message) {
+    	if (!stateDispatcher->checkUserRegisrty(message->chat)) {
+    		//if user is already registered
+    		stateDispatcher->sendMessage(bot, message->chat->id, "Привет! Я бот, созданный для поиска новых знакомых\n"
+    	            		"Давай познакомимся:)");
+    		stateDispatcher->createNewUser(bot, message->chat);
+    		return;
+    	}
+
     	if (StringTools::startsWith(message->text, "/start")) {
     	            return;
     	        }
@@ -58,6 +66,13 @@ BotDispatcher::BotDispatcher() {
     		bot->getApi().editMessageReplyMarkup(query->message->chat->id, query->message->messageId, "", nullptr);
     	} catch (TgBot::TgException &e) {}
     	// set new state
+    	if (!stateDispatcher->checkUserRegisrty(query->message->chat)) {
+    			//if user is already registered
+    			stateDispatcher->sendMessage(bot, query->message->chat->id, "Привет! Я бот, созданный для поиска новых знакомых\n"
+    		            		"Давай познакомимся:)");
+    			stateDispatcher->createNewUser(bot, query->message->chat);
+    			return;
+    	}
 
     	// if like button
     	if (query->data.substr(0, 3) == ":::") {
